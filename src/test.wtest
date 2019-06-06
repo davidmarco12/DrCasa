@@ -1,0 +1,40 @@
+import DrCasa.*
+
+describe "Dr. Casa"{
+	var malaria
+	var otitis
+	var lupus
+	var otraMalaria
+	var frank
+	var logan
+	
+	fixture{
+		malaria = new EnfermedadInfecciosa(500)
+		otitis = new EnfermedadInfecciosa(100)
+		lupus = new EnfermedadInfecciosa(10000)
+		otraMalaria = new EnfermedadInfecciosa(800)
+		logan = new Persona(36, 3000000, #{malaria, otitis, lupus})
+		frank = new Persona(36, 3500000, #{})
+		
+	}
+	
+	test "Frank contrae la otraMalaria"{
+		frank.contraerEnfermedad(otraMalaria)
+		assert.notThat(frank.enfermedades().isEmpty())
+	}	
+	
+	test "La malaria de logan se reproduce y afecta 1000 celulas"{
+		malaria.reproducir()
+		assert.equals(1000, malaria.celulaAmenazadas())
+	}
+	
+	test "La enfermedad que mas celulas le afecta a logan es lupus"{
+		assert.equals(lupus, logan.enfermedadDura())
+	}
+	
+}
+
+
+
+
+
